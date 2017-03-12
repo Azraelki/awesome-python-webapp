@@ -255,7 +255,7 @@ class Model(dict):
         Find by where clause and return one result. If multiple results found, 
         only the first one returned. If no result found, return None.
         '''
-        d = db.select_one('select * from %s %s' % (cls.__table__, 'where'), *args)
+        d = db.select_one('select * from %s %s' % (cls.__table__, where), *args)
         return cls(**d) if d else None
 
     @classmethod
@@ -326,7 +326,7 @@ class Model(dict):
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
-    db.create_engine('root', 'root', 'test')
+    db.create_engine('www-data', 'www-data', 'test')
     db.update('drop table if exists user')
     db.update('create table user (id int primary key, name text, email text, passwd text, last_modified real)')
     import doctest
