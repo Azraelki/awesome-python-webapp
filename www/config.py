@@ -18,13 +18,13 @@ class Dict(dict):
 		for k, v in zip(names,  values):
 			self[k] = v
 
-	def __getter__(slef, key):
+	def __getattr__(self, key):
 		try:
-			self[key]
+			return self[key]
 		except KeyError:
 			raise AttributeError(r"'DIct' object has no attribute '%s'" % key)
 
-	def __setter__(self, key, value):
+	def __setattr__(self, key, value):
 		self[key] = value
 
 def merge(defaults, override):
@@ -53,4 +53,3 @@ try:
 except ImportError:
 	pass
 configs = toDict(configs)
-print configs
